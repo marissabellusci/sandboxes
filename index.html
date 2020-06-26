@@ -6,37 +6,98 @@
 </head>
 <body>
   <script>
-    // Your JavaScript goes here! This is the SCRIPT tag of your skeleton HTML file.
-    function add7(x,y){
-      return x + 7;
+// Below are some basic functions I was practicing while learning.
+//   Commented out since they were only for practice and so that 
+//   I can use this file as a sandbox to test new code. 
+//   (I could not bring myself to delete anything bc I am a hoarder)
 
-    };
-    console.log(add7(5, '7'));
+//function add7(x,y){
+//    return x + 7;
 
-
-
-    function multiply(x,y){
-      return x * y;
-
-
-    };
-    console.log(multiply(2, 4))
+//  };
+//  console.log(add7(5, '7'));
 
 
-    function capitalize(string){
-      return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase(); 
-    }
 
-    console.log(capitalize('this input is all lowercase'));
-    console.log(capitalize('THIS INPUT IS ALL UPPERCASE'));
-    console.log(capitalize('tHis InPut Is MiXeD CAse'));
+//  function multiply(x,y){
+//    return x * y;
 
-    function lastLetter(string){
-      return string.charAt(string.length-1);
 
-    }
+//  };
+//  console.log(multiply(2, 4))
 
-    console.log(lastLetter('Last letter of this string')); //returns 'g'
+
+//  function capitalize(string){
+//    return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase(); 
+// }
+
+//  console.log(capitalize('this input is all lowercase'));
+//  console.log(capitalize('THIS INPUT IS ALL UPPERCASE'));
+//  console.log(capitalize('tHis InPut Is MiXeD CAse'));
+
+//  function lastLetter(string){
+//    return string.charAt(string.length-1);
+
+// }
+
+//  console.log(lastLetter('Last letter of this string')); 
+
+// Below is some practice code I wrote while learning loops. 
+
+// for (let i = 2; i <= 10; i++){
+// if (i % 2){
+//   continue;
+//   }
+//  alert(i);
+//}
+
+//TASK: REWRITE FOR STATEMENT AS WHILE STATEMENT:
+
+//for (let i = 0; i < 3; i++) {
+//  alert( `number ${i}!` );
+//}
+
+//BECOMES:
+
+// let i = 0;
+// while (i < 3) {
+  
+//  alert( `number ${i}!`);
+
+//  i++;
+//}
+
+//let num;
+
+//do {
+//  num = prompt("Input a number over 100",0)
+//} while (num <= 100 && num);
+
+
+// Below is JS to find a prime number between 1 and whatever n is. 
+// It works now, but it took me a few tries. 
+// This was my first try at nesting loops so it was a little daunting!
+
+// let n = 10
+
+  // nextPrime:
+  // for (let i = 2; i < n; i++){
+
+    //   for (j = 2; j < i; j++){
+
+      //if (i % j === 0){
+
+        //continue nextPrime;
+
+      //}
+      
+    //}
+
+    //alert(i);
+
+  //}
+  
+
 
 
   </script>
