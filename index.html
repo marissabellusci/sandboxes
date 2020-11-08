@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page Title</title>
+  <title>Sandbox</title>
   <meta charset="UTF-8"/>
 </head>
 <body>
+  <button id="btn">The Button</button>
+  <div id="container"></div>
+
   <script>
 // Below are some basic functions I was practicing while learning.
 //   Commented out since they were only for practice and so that 
@@ -96,10 +99,73 @@
     //alert(i);
 
   //}
+
+        //below is the given example from TOP. It works. 
   
+   // const container = document.querySelector('#container');
+
+   // const content = document.createElement('div');
+   // content.classList.add('content');
+   // content.textContent = 'This is the glorious text-content!';
+
+   // container.appendChild(content);
+
+   // Below is the code I wrote for the DOM manipulation exercise, it works.
+
+     // const container = document.querySelector('#container');
+
+     // const para = document.createElement('p');
+     // para.classList.add('para');
+     // para.textContent = 'Hey, I\'m red text.';
+
+     // para.style.color = 'red';
+
+     // container.appendChild(para);
+
+     // const h3 = document.createElement('h3');
+     // h3.classList.add('h3');
+     // h3.textContent = 'I\'m a blue h3!';
+
+     // h3.style.color = 'blue';
+
+     // container.appendChild(h3);
+
+     // const newDiv = document.createElement('div');
+     // newDiv.classList.add('newDiv');
+     // newDiv.style.border = 'solid';
+     // newDiv.style.borderColor = 'black';
+     // newDiv.style.background = 'pink';
+
+    //const h1 = document.createElement('h1');
+    //  h1.classList.add('h1');
+    //  h1.textContent = 'I\'m in a div!';
+
+     // newDiv.appendChild(h1);
+
+      //const para2 = document.createElement('p');
+      //para2.classList.add('para2');
+      //para2.textContent = 'ME TOO!';
+
+      //newDiv.appendChild(para2);
+
+      //container.appendChild(newDiv);
 
 
+        //BELOW IS PRACTICING WITH EVENTS
+
+       // const btn = document.querySelector('#btn');
+       // btn.onclick = () => alert('button');
+
+        //const btn = document.querySelector('#btn');
+        //btn.addEventListener('click', () => {alert('BUTTON!')});
+
+       //   const btn = document.querySelector('#btn');
+
+      //    btn.addEventListener('click', function (e){
+      //      e.target.style.background = 'blue';
+      //    })
 
   </script>
+  <script src="script.js"></script>
 </body>
 </html>
