@@ -41,6 +41,11 @@ function display(){
         if (!para && !node){
             para = document.createElement("p");
             node = document.createTextNode(myLibrary[i].info().toString());
+            para.setAttribute("name",title.value);
+            para.setAttribute("id",title.value);
+            para.setAttribute("data-index-number", itemIndex);
+        
+            //para.setAttribute("data-index-number", myLibrary.indexOf(myLibrary[i].title));
             button = document.createElement("button");
             button.setAttribute("id","remove");
             let buttonNode = document.createTextNode("Remove book");
@@ -130,6 +135,8 @@ function handleRemove(e){
 
 //Function to submit newly added book
 
+let itemIndex;
+
 function handleSubmit(e){
    
     e.preventDefault();
@@ -148,15 +155,15 @@ function handleSubmit(e){
 
     const creatingBook = new Book (titleCase(title.value), titleCase(author.value), pages.value, readStatus)
     addBookToLibrary(creatingBook);
+    console.log(myLibrary.indexOf(creatingBook));
+    itemIndex = myLibrary.indexOf(creatingBook);
     display();
-    console.log("submit");
     formElement.removeChild(form);
     title.value = null;
     author.value = null;
     pages.value = null;
     readOrNot.checked = false;
     let removeButton = document.getElementById("remove");
-    console.log(removeButton);
     removeButton.addEventListener("click",handleRemove);
 }
 submit.addEventListener("click", handleSubmit);
