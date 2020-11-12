@@ -33,7 +33,8 @@ function display(){
     let para = null;
     let node = null;
     let button = null;
-    
+
+
 
     for (i = 0; i < myLibrary.length; i++){
         //console.log(myLibrary[i]);
@@ -44,25 +45,32 @@ function display(){
             para.setAttribute("name",title.value);
             para.setAttribute("id",title.value);
             para.setAttribute("data-index-number", itemIndex);
-        
-            //para.setAttribute("data-index-number", myLibrary.indexOf(myLibrary[i].title));
             button = document.createElement("button");
             button.setAttribute("id","remove");
+            button.setAttribute("class","remove");
             let buttonNode = document.createTextNode("Remove book");
         para.appendChild(node);
         para.appendChild(button);
         button.appendChild(buttonNode);
+        console.log(para.dataset.indexNumber);
 
         const element = document.getElementById("library");
         element.appendChild(para);
         }
 
-        else {
+        else if (para || node) {
+            node.nodeValue = null;
             node.nodeValue = myLibrary[i].info().toString();
         }
-    }
+
     
-};
+    }
+}
+    
+    let removeButtons = document.querySelectorAll(".remove");
+    removeButtons.forEach(removeButton => removeButton.addEventListener("click",handleRemove));
+    
+
 
 window.addEventListener("load",display);
 
@@ -129,8 +137,27 @@ function titleCase(str){
 
 //Function to remove book
 
+let remove = false;
+
+let indexToRemove;
+let bookToRemove;
+
 function handleRemove(e){
-    console.log(e.target);
+    console.log(e.target.parentElement);
+    console.log(`This action ${e.target.id}s ${e.target.parentElement.id} at index ${e.target.parentElement.dataset.indexNumber}`)
+    myLibrary.splice(e.target.parentElement.dataset.indexNumber);
+    indexToRemove = e.target.parentElement.dataset.indexNumber;
+    bookToRemove = document.querySelector(`[data-index-number='${indexToRemove}'`);
+    console.log(myLibrary);
+    console.log(bookToRemove);
+    document.getElementById('library').removeChild(bookToRemove);
+   
+
+
+    
+    //e.target.parentElement
+
+   // myLibrary.splice()
 }
 
 //Function to submit newly added book
@@ -163,14 +190,20 @@ function handleSubmit(e){
     author.value = null;
     pages.value = null;
     readOrNot.checked = false;
-    let removeButton = document.getElementById("remove");
-    removeButton.addEventListener("click",handleRemove);
+    let removeButtons = document.querySelectorAll(".remove");
+    removeButtons.forEach(removeButton => removeButton.addEventListener("click",handleRemove));
+    console.log(removeButtons);
 }
 submit.addEventListener("click", handleSubmit);
 
 window.addEventListener("load",function(){    
     display();
     });
+
+    let removerButtons = document.querySelectorAll(".remove");
+    removerButtons.forEach(removeButton => removeButton.addEventListener("click",handleRemove));
+
+
 
 
 
