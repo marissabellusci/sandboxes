@@ -1,0 +1,56 @@
+html {
+    text-align: center;
+}
+
+#library {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+p {
+    border: 1px solid black;
+    width: 15vw;
+    height: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 20px;
+    padding: 10px;
+}
+
+#container {
+    margin: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+input, button {
+    margin: 10px;
+    height: 40px;
+}
+
+input {
+    padding: none;
+}
+
+input, button, label {
+    font-size: 20px;
+    text-align: center;
+
+}
+
+button {
+    padding: 5px;
+    
+}
+
+.remove {
+    font-size: 15px;
+    padding: none;
+}

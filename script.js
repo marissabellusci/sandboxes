@@ -32,6 +32,7 @@ function display(){
     console.log(myLibrary);
     let para = null;
     let node = null;
+    let button = null;
     
 
     for (i = 0; i < myLibrary.length; i++){
@@ -40,7 +41,12 @@ function display(){
         if (!para && !node){
             para = document.createElement("p");
             node = document.createTextNode(myLibrary[i].info().toString());
+            button = document.createElement("button");
+            button.setAttribute("id","remove");
+            let buttonNode = document.createTextNode("Remove book");
         para.appendChild(node);
+        para.appendChild(button);
+        button.appendChild(buttonNode);
 
         const element = document.getElementById("library");
         element.appendChild(para);
@@ -116,6 +122,14 @@ function titleCase(str){
     return str.join(' ');
 };
 
+//Function to remove book
+
+function handleRemove(e){
+    console.log(e.target);
+}
+
+//Function to submit newly added book
+
 function handleSubmit(e){
    
     e.preventDefault();
@@ -141,9 +155,18 @@ function handleSubmit(e){
     author.value = null;
     pages.value = null;
     readOrNot.checked = false;
+    let removeButton = document.getElementById("remove");
+    console.log(removeButton);
+    removeButton.addEventListener("click",handleRemove);
 }
 submit.addEventListener("click", handleSubmit);
 
 window.addEventListener("load",function(){    
     display();
     });
+
+
+
+
+
+
