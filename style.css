@@ -10,7 +10,8 @@ html {
 p {
     border: 1px solid black;
     width: 15vw;
-    height: 20vw;
+    height: fit-content;
+    min-height: 25vw;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -52,5 +53,14 @@ button {
 
 .remove {
     font-size: 15px;
-    padding: none;
+    padding: 1px 10px;
+    background-color: rgba(255, 0, 0, 0.336);
+}
+
+.unread {
+    background-color: thistle;
+}
+
+.read {
+    background-color: turquoise;
 }

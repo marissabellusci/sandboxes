@@ -1,4 +1,7 @@
-/* This is where all the Book objects will be stored */
+// global variables
+let node;
+
+/* This is the main array where all the Book objects will be stored */
 
 let myLibrary = [];
 
@@ -10,9 +13,30 @@ function Book(title, author, pages, read){
     this.pages = pages;
     this.read = read;
     this.info = function() {
-        return `${title} by ${author}, ${pages} pages. ${read}`
+        return `${title} by ${author}, ${pages} pages. Been read: ${read}`
+        
     }
 };
+
+// This is the prototype//
+
+Book.prototype.beenReadToggle = function (){
+    this.read = !this.read;
+    this.info = function() {
+        return `${this.title} by ${this.author}, ${this.pages} pages. Been read: ${this.read}`
+        
+    }
+    const bookIndex = myLibrary.indexOf(this);
+    console.log(this.read);
+    console.log(this.info());
+    const editableItem = document.querySelector(`[data-index-number = '${bookIndex}']`);
+    console.log(editableItem);
+    node.textContent = this.info();
+
+   // document.getElementById('library')
+
+}
+
 
 /* Manually added books */
 
@@ -27,11 +51,12 @@ function  addBookToLibrary(newBook){
 };
 
 /* Function to display books on page */
+ 
 
 function display(){
     console.log(myLibrary);
     let para = null;
-    let node = null;
+    node = null;
     let button = null;
 
 
@@ -48,10 +73,49 @@ function display(){
             button = document.createElement("button");
             button.setAttribute("id","remove");
             button.setAttribute("class","remove");
-            let buttonNode = document.createTextNode("Remove book");
+            let buttonNode = document.createTextNode("X");
+            readButton = document.createElement("button");
+            readButton.setAttribute("id","read-button");
+            readButton.setAttribute("class","read-button");
+            let readButtonNode = document.createTextNode("Read/Unread");
+
+                if (readOrNot.checked == true){
+                    readButtonNode.textContent = "Read";
+                    readButton.setAttribute("class","read")
+                    
+                }
+
+                if (readOrNot.checked == false) {
+                    readButtonNode.textContent = "Unread";
+                    readButton.setAttribute("class","unread");
+                }
+            readButton.addEventListener("click",function(e){
+                console.log(this.parentElement.dataset.indexNumber);
+              
+                myLibrary[this.parentElement.dataset.indexNumber].beenReadToggle();
+
+
+                if (e.target.classList.contains("read")){
+                    e.target.classList.remove("read");
+                    e.target.classList.add("unread");
+                    e.target.textContent = "Unread";
+                    
+                }
+
+                else if (e.target.classList.contains("unread")){
+                    e.target.classList.remove("unread");
+                    e.target.classList.add("read");
+                    e.target.textContent = "Read";
+                    
+                }
+                
+            })
+
+        para.appendChild(readButton);
         para.appendChild(node);
         para.appendChild(button);
         button.appendChild(buttonNode);
+        readButton.appendChild(readButtonNode);
         console.log(para.dataset.indexNumber);
 
         const element = document.getElementById("library");
@@ -83,7 +147,7 @@ newBookButton.appendChild(newBookButtonNode);
 const newBookElement = document.getElementById("container");
 newBookElement.appendChild(newBookButton);
 
-/*Next I need to make the newBookButton create a form to add a new book*/
+/*FORM SETUP*/
 
 
 const form = document.createElement("form");    
@@ -173,11 +237,13 @@ function handleSubmit(e){
     }
 
     if (readOrNot.checked == true) {
-        readStatus = "I've read it.";
+        readStatus = true;
+        
     }
 
     if (readOrNot.checked == false){
-        readStatus = "Haven't read this one yet.";
+        readStatus = false;
+    
     }
 
     const creatingBook = new Book (titleCase(title.value), titleCase(author.value), pages.value, readStatus)
@@ -192,7 +258,6 @@ function handleSubmit(e){
     readOrNot.checked = false;
     let removeButtons = document.querySelectorAll(".remove");
     removeButtons.forEach(removeButton => removeButton.addEventListener("click",handleRemove));
-    console.log(removeButtons);
 }
 submit.addEventListener("click", handleSubmit);
 
