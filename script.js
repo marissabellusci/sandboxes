@@ -28,7 +28,15 @@ Book.prototype.info = function() {
 
 //newBook.proptotype = Object.create(Book.prototype);
 
-Book.prototype.beenReadToggle = function (){
+Book.prototype.beenReadToggle = function (e){
+
+    console.log(this.title);
+    console.log(`This action updates read status of ${this.title} at index ${myLibrary.indexOf(this)}`)
+    let thisBooksIndex = myLibrary.indexOf(this);
+    console.log(thisBooksIndex);
+    
+
+    console.log(`${this.title} is being toggled`);
     this.read = !this.read;
     this.info = function() {
         if (this.read == true) {
@@ -38,12 +46,18 @@ Book.prototype.beenReadToggle = function (){
         else return `${this.title} by ${this.author} (${this.pages} pages). I haven't read it.`
 
     }
-    const bookIndex = myLibrary.indexOf(this);
+
+    
+
+    display();
+
+    /*const bookIndex = myLibrary.indexOf(this);
     console.log(this.read);
     console.log(this.info());
     const editableItem = document.querySelector(`[data-index-number = '${bookIndex}']`);
     console.log(editableItem);
     node.textContent = this.info();
+    */
 
    // document.getElementById('library')
 
@@ -67,20 +81,20 @@ function  addBookToLibrary(newBook){
 
 function display(){
     console.log(myLibrary);
-    let para = null;
-    node = null;
-    let button = null;
+    document.getElementById('library').textContent = '';
+    node = '';
+    let button = '';
 
 
 
     for (i = 0; i < myLibrary.length; i++){
         //console.log(myLibrary[i]);
+            itemIndex = i;
 
-        if (!para && !node){
             para = document.createElement("p");
             node = document.createTextNode(myLibrary[i].info().toString());
-            para.setAttribute("name",titleField.value);
-            para.setAttribute("id",titleField.value);
+            para.setAttribute("name", myLibrary[i].title);
+            para.setAttribute("id", myLibrary[i].title);
             para.setAttribute("data-index-number", itemIndex);
             button = document.createElement("button");
             button.setAttribute("id","remove");
@@ -91,35 +105,13 @@ function display(){
             readButton.setAttribute("class","read-button");
             let readButtonNode = document.createTextNode("Read/Unread");
 
-                if (readOrNot.checked == true){
-                    readButtonNode.textContent = "Read";
-                    readButton.setAttribute("class","read")
-                    
-                }
-
-                if (readOrNot.checked == false) {
-                    readButtonNode.textContent = "Unread";
-                    readButton.setAttribute("class","unread");
-                }
-            readButton.addEventListener("click",function(e){
-                console.log(this.parentElement.dataset.indexNumber);
               
-                myLibrary[this.parentElement.dataset.indexNumber].beenReadToggle(Book);
+            readButton.addEventListener("click",function(e){
+                console.log(`${myLibrary[this.parentElement.dataset.indexNumber].title}'s read status should be updating`);
+              
+                myLibrary[this.parentElement.dataset.indexNumber].beenReadToggle();
 
 
-                if (e.target.classList.contains("read")){
-                    e.target.classList.remove("read");
-                    e.target.classList.add("unread");
-                    e.target.textContent = "Unread";
-                    
-                }
-
-                else if (e.target.classList.contains("unread")){
-                    e.target.classList.remove("unread");
-                    e.target.classList.add("read");
-                    e.target.textContent = "Read";
-                    
-                }
                 
             })
 
@@ -128,23 +120,19 @@ function display(){
         para.appendChild(button);
         button.appendChild(buttonNode);
         readButton.appendChild(readButtonNode);
-        console.log(para.dataset.indexNumber);
+        
 
         const element = document.getElementById("library");
         element.appendChild(para);
         }
 
-        else if (para || node) {
-            node.nodeValue = null;
-            node.nodeValue = myLibrary[i].info().toString();
-        }
+        removeButtons = document.querySelectorAll(".remove");
+        removeButtons.forEach(removeButton => removeButton.addEventListener("click",handleRemove));
+    
 
     
     }
-}
-    
-    let removeButtons = document.querySelectorAll(".remove");
-    removeButtons.forEach(removeButton => removeButton.addEventListener("click",handleRemove));
+
     
 
 
@@ -216,17 +204,17 @@ function titleCase(str){
 let remove = false;
 
 let indexToRemove;
-let bookToRemove;
+
 
 function handleRemove(e){
+
     console.log(e.target.parentElement);
     console.log(`This action ${e.target.id}s ${e.target.parentElement.id} at index ${e.target.parentElement.dataset.indexNumber}`)
     myLibrary.splice(e.target.parentElement.dataset.indexNumber);
     indexToRemove = e.target.parentElement.dataset.indexNumber;
-    bookToRemove = document.querySelector(`[data-index-number='${indexToRemove}'`);
     console.log(myLibrary);
-    console.log(bookToRemove);
-    document.getElementById('library').removeChild(bookToRemove);
+    itemIndex = myLibrary.indexOf(indexToRemove);
+    display();
    
 
 
@@ -235,7 +223,6 @@ function handleRemove(e){
 
    // myLibrary.splice()
 }
-
 //Function to submit newly added book
 
 let itemIndex;
@@ -258,27 +245,22 @@ function handleSubmit(e){
     
     }
 
-    const creatingBook = new Book (titleCase(titleField.value), titleCase(authorField.value), pagesField.value, readStatus)
+    let creatingBook = new Book (titleCase(titleField.value), titleCase(authorField.value), pagesField.value, readStatus)
     addBookToLibrary(creatingBook);
     console.log(myLibrary.indexOf(creatingBook));
-    itemIndex = myLibrary.indexOf(creatingBook);
     display();
     formElement.removeChild(form);
     titleField.value = null;
     authorField.value = null;
     pagesField.value = null;
     readOrNot.checked = false;
-    let removeButtons = document.querySelectorAll(".remove");
-    removeButtons.forEach(removeButton => removeButton.addEventListener("click",handleRemove));
 }
+
 submit.addEventListener("click", handleSubmit);
 
 window.addEventListener("load",function(){    
     display();
     });
-
-let removerButtons = document.querySelectorAll(".remove");
-removerButtons.forEach(removeButton => removeButton.addEventListener("click",handleRemove));
 
 
 
