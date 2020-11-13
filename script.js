@@ -105,6 +105,14 @@ function display(){
             readButton.setAttribute("class","read-button");
             let readButtonNode = document.createTextNode("Read/Unread");
 
+            if (myLibrary[i].read == true){
+                readButton.setAttribute("class","read");
+                readButtonNode.textContent = "Read";
+            } else {
+                readButton.setAttribute("class","unread");
+                readButtonNode.textContent = "Unread";
+            }
+
               
             readButton.addEventListener("click",function(e){
                 console.log(`${myLibrary[this.parentElement.dataset.indexNumber].title}'s read status should be updating`);
