@@ -13,8 +13,11 @@ function Book(title, author, pages, read){
     this.pages = pages;
     this.read = read;
     this.info = function() {
-        return `${title} by ${author}, ${pages} pages. Been read: ${read}`
-        
+        if (this.read == true) {
+            return `${this.title} by ${this.author}, ${this.pages} pages. I've read it.`
+            }
+    
+            else return `${this.title} by ${this.author}, ${this.pages} pages. I haven't read it.`
     }
 };
 
@@ -23,8 +26,12 @@ function Book(title, author, pages, read){
 Book.prototype.beenReadToggle = function (){
     this.read = !this.read;
     this.info = function() {
-        return `${this.title} by ${this.author}, ${this.pages} pages. Been read: ${this.read}`
-        
+        if (this.read == true) {
+        return `${this.title} by ${this.author}, ${this.pages} pages. I've read it.`
+        }
+
+        else return `${this.title} by ${this.author}, ${this.pages} pages. I haven't read it.`
+
     }
     const bookIndex = myLibrary.indexOf(this);
     console.log(this.read);
